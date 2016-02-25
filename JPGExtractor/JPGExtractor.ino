@@ -36,11 +36,11 @@ void setup()
     mySerial.begin(38400);
     pinMode(12,OUTPUT);
     pinMode(11,OUTPUT);
-    //DefaultCompressionRatio();
     //ChangeBaudRate();
     SendResetCmd();
     delay(3500);  //After reset, wait 2-3 second to send take picture command
     //ChangeSizeMedium();
+    ChangeCompressionRatio();
 }
 
 void loop()
@@ -154,7 +154,7 @@ void StopTakePhotoCmd()
     mySerial.write(0x03);
 }
 
-void DefaultCompressionRatio() {
+void ChangeCompressionRatio() {
     mySerial.write((byte)0x56);
     mySerial.write((byte)0x00);
     mySerial.write((byte)0x31);
@@ -163,7 +163,7 @@ void DefaultCompressionRatio() {
     mySerial.write((byte)0x01);
     mySerial.write((byte)0x12);
     mySerial.write((byte)0x04);
-    mySerial.write((byte)0x36);
+    mySerial.write((byte)0x00); // default 36
 }
 
 void ChangeBaudRate() {
